@@ -1,18 +1,17 @@
 ﻿#include <iostream>
 #include <iterator>
 #include <boost/scoped_ptr.hpp>
+#include <boost/locale/encoding.hpp>
 #include <soci.h>
 #include <soci-mysql.h>
 
 std::string gbk2utf8(std::string gbk)
 {
-	return gbk;
-	//return boost::locale::conv::between(gbk, "utf-8", "gbk");
+	return boost::locale::conv::between(gbk, "utf-8", "gbk");
 }
 std::string utf82gbk(std::string utf8)
 {
-	return utf8;
-	//return boost::locale::conv::between(utf8, "gbk", "utf-8");
+	return boost::locale::conv::between(utf8, "gbk", "utf-8");
 }
 
 int main()
@@ -28,7 +27,7 @@ int main()
 	try
 	{
 		pool.reset(new soci::connection_pool(connection_pool_size));
-		for (size_t i = 0; i < connection_pool_size; i++)
+		for (size_t i = 0; i != connection_pool_size; i++)
 		{
 			soci::session& sql = pool->at(i);
 			sql.open(backend_factory, connect_string);

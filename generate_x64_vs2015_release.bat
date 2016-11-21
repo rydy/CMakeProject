@@ -11,5 +11,5 @@ cd windows
 set HOST_PLATFORM=PLATFORM_X64
 set HOST_OS=OS_WINDOWS
 
-cmake -G "Visual Studio 12 2013 Win64" ../../../src
+cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015 Win64" ../../../src
 @pause
